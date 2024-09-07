@@ -63,3 +63,7 @@ spec:
       destination:
         name: '{{.name}}'
         namespace: monitoring
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
