@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: guestbook
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+   - clusters:
+      selector:
+        matchLabels:
+          type: 'prod'
+      values:
+        revision: '55.8.1'
+   - clusters:
+      selector:
+        matchLabels:
+          type: 'dev'
+      values:
+        revision: '55.8.1'
+  template:
+    metadata:
+      name: 'kube-prometheus-stack-{{.name}}'
+    spec:
+      project: 'default'
+      source:
+        chart: kube-prometheus-stack
+        repoURL: https://prometheus-community.github.io/helm-charts
+        targetRevision: '{{.values.revision}}'
+        helm:
+          values: |
+            alertmanager:
+              ingress:
+                enabled: true
+                hosts:
+                  - alertmanager-{{.name}}.localhost
+                paths:
+                  - /
+            grafana:
+              adminPassword: admin
+              sidecar:
+                dashboards:
+                  enabled: true
+                  labelValue: ""
+              ingress:
+                enabled: true
+                hosts:
+                  - grafana-{{.name}}.localhost
+                paths:
+                  - /
+            prometheus:
+              ingress:
+                enabled: true
+                hosts:
+                  - prometheus-{{.name}}.localhost
+                paths:
+                  - /
+            prometheus-node-exporter:
+              prometheus:
+                monitor:
+                  interval: 60s
+      destination:
+        name: '{{.name}}'
+        namespace: monitoring

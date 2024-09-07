@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: 
+spec:
+  project: default
+  syncPolicy:
+    automated: {}
+  source:
+    repoURL: https://github.com/34fathombelow/declarative_spec_demo.git
+    targetRevision: main
+    path: argo_apps
+    directory:
+      recurse: true
+  destination:
+    name: in-cluster
+    namespace: argocd
