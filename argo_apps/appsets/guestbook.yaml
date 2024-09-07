@@ -21,8 +21,8 @@ spec:
         targetRevision: '{{env}}'
         path: .
       destination:
-        server: 'https://kubernetes.default.svc'
-        namespace: argocd
+        server: '{{name}}'
+        namespace: guestbook
       syncPolicy:
         automated:
           prune: true
