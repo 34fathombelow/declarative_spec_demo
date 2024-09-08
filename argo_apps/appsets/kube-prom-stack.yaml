@@ -12,7 +12,7 @@ spec:
         matchLabels:
           type: 'prod'
       values:
-        revision: '55.8.1'
+        revision: '55.8.2'
    - clusters:
       selector:
         matchLabels:
