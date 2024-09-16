@@ -12,7 +12,7 @@ spec:
         matchLabels:
           type: 'prod'
       values:
-        revision: '55.8.1'
+        revision: '66.9.0'
    - clusters:
       selector:
         matchLabels:
@@ -59,7 +59,7 @@ spec:
             prometheus-node-exporter:
               prometheus:
                 monitor:
-                  interval: 60s
+                  interval: 15s
       destination:
         name: '{{.name}}'
         namespace: monitoring
