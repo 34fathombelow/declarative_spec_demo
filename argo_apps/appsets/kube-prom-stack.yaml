@@ -18,7 +18,7 @@ spec:
         matchLabels:
           type: 'dev'
       values:
-        revision: '55.8.2'
+        revision: '62.7.0'
   template:
     metadata:
       name: 'kube-prometheus-stack-{{.name}}'
