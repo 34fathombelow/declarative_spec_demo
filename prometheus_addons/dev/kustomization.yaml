@@ -1,0 +1,44 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+- name: kube-prometheus-stack
+  namespace: monitoring
+  includeCRDs: true
+  repo: https://prometheus-community.github.io/helm-charts
+  version: '61.9.0'
+  releaseName: kube-prometheus-stack
+  valuesInline:
+    alertmanager:
+      ingress:
+        enabled: true
+        hosts:
+          - alertmanager-dev.localhost
+        paths:
+          - /
+    grafana:
+      adminPassword: admin
+      sidecar:
+        dashboards:
+          enabled: true
+          labelValue: ""
+      ingress:
+        enabled: true
+        hosts:
+          - grafana-dev.localhost
+        paths:
+          - /
+    prometheus:
+      ingress:
+        enabled: true
+        hosts:
+          - prometheus-dev.localhost
+        paths:
+          - /
+    prometheus-node-exporter:
+      prometheus:
+        monitor:
+          interval: 15s
+
+resources:
+  - ../all_env
