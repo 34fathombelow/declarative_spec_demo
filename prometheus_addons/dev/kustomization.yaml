@@ -9,10 +9,7 @@ helmCharts:
   version: '62.7.0'
   releaseName: kube-prometheus-stack
   valuesInline:
-    alertmanager:
-      alertmanagerSpec:
-        image:
-          tag: v1.27.0  
+    alertmanager: 
       ingress:
         enabled: true
         hosts:
@@ -42,6 +39,9 @@ helmCharts:
       prometheus:
         monitor:
           interval: 15s
+    prometheusOperator:
+      image:
+        tag: doesnotexist
 
 resources:
   - ../all_env
