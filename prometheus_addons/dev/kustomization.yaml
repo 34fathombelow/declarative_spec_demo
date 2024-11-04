@@ -6,7 +6,7 @@ helmCharts:
   namespace: monitoring
   includeCRDs: true
   repo: https://prometheus-community.github.io/helm-charts
-  version: '62.7.0'
+  version: '62.7.100'
   releaseName: kube-prometheus-stack
   valuesInline:
     alertmanager:
