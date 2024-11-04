@@ -10,6 +10,9 @@ helmCharts:
   releaseName: kube-prometheus-stack
   valuesInline:
     alertmanager:
+      alertmanagerSpec:
+        image:
+          tag: v1.27.0  
       ingress:
         enabled: true
         hosts:
