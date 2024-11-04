@@ -39,9 +39,5 @@ helmCharts:
       prometheus:
         monitor:
           interval: 15s
-    prometheusOperator:
-      image:
-        tag: doesnotexist
-
 resources:
   - ../all_env
