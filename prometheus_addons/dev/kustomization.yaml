@@ -17,6 +17,8 @@ helmCharts:
         paths:
           - /
     grafana:
+      image:
+        tag: latest
       adminPassword: admin
       sidecar:
         dashboards:
